@@ -7,7 +7,7 @@ class Resultado extends StatelessWidget {
   final List<String> cores;
   final void Function() reiniciar;
 
-  Color corResultante() {
+  Color get corResultante {
     var cor1 = cores[0].toString();
     var cor2 = cores[1].toString();
 
@@ -46,7 +46,8 @@ class Resultado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: corResultante(),
+      color: corResultante,
+      width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
