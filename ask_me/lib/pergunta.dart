@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Asks extends StatelessWidget {
-  const Asks({
+class Pergunta extends StatelessWidget {
+  const Pergunta({
     Key? key,
-    required this.ask,
+    required this.pergunta,
   }) : super(key: key);
 
-  final String ask;
+  final String pergunta;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Asks extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.fromLTRB(5, 20, 5, 20),
       child: Text(
-        ask,
+        pergunta,
         style: const TextStyle(fontSize: 28),
         textAlign: TextAlign.center,
       ),

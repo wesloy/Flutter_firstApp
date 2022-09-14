@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import './quiz.dart';
-import './result.dart';
+import 'questionario.dart';
+import 'resultado.dart';
 
 main() => runApp(const AskMeApp());
 
@@ -12,29 +14,42 @@ class AskMeApp extends StatefulWidget {
 }
 
 class _AskMeAppState extends State<AskMeApp> {
-  var _askChecked = 0;
+  var _perguntaSelecionada = 0;
+  final List<String> _coresSelecionadas = [];
 
-  final _asksList = const [
+  final _listaPerguntas = const [
     {
-      'ask': ' Qual é sua cor primária preferida?',
-      'answears': ['Vermelho', 'Azul', 'Amarelo']
+      'pergunta': ' Qual é sua cor primária preferida?',
+      'respostas': [
+        {'texto': 'Vermelho', 'cor': 'red'},
+        {'texto': 'Azul', 'cor': 'blue'},
+        {'texto': 'Amarelo', 'cor': 'yellow'},
+      ]
     },
     {
-      'ask': ' Qual é sua cor secundária preferida?',
-      'answears': ['Roxo', 'Laranja', 'Verde']
+      'pergunta': ' Qual é sua cor secundária preferida?',
+      'respostas': [
+        {'texto': 'Roxo', 'cor': 'purple'},
+        {'texto': 'Laranja', 'cor': 'orange'},
+        {'texto': 'Verde', 'cor': 'green'},
+      ]
     },
   ];
 
-  void _answear() {
+  void _responder(String cor) {
     setState(() {
-      _askChecked++;
+      _perguntaSelecionada++;
+      _coresSelecionadas.add(cor);
     });
+
+    log(cor);
+    log(_coresSelecionadas.length.toString());
   }
 
-  bool get _checkedAsk {
+  bool get _validarListaPerguntas {
     // seleção deve ser menor que o tamanho da lista
     // levando em consideração que o índice começa em zero
-    return _askChecked < _asksList.length;
+    return _perguntaSelecionada < _listaPerguntas.length;
   }
 
   @override
@@ -51,14 +66,14 @@ class _AskMeAppState extends State<AskMeApp> {
             ),
           ),
           body:
-              _checkedAsk // validando com operador ternário para evitar de solicitar uma pergunta fora do índice
-                  ? Quiz(
-                      answear: _answear,
-                      askChecked: _askChecked,
-                      asksList: _asksList,
-                      checkedAsk: _checkedAsk,
+              _validarListaPerguntas // validando com operador ternário para evitar de solicitar uma pergunta fora do índice
+                  ? Questionario(
+                      listaPerguntas: _listaPerguntas,
+                      perguntaSelecionada: _perguntaSelecionada,
+                      responder: _responder,
+                      validarListaPerguntas: _validarListaPerguntas,
                     )
-                  : const Result(),
+                  : Resultado(cores: _coresSelecionadas),
         ),
       ),
     );

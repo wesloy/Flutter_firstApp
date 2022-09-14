@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Answaers extends StatelessWidget {
-  const Answaers({
+class Resposta extends StatelessWidget {
+  const Resposta({
     Key? key,
     required this.txt,
-    required this.checked,
+    required this.responder,
   }) : super(key: key);
 
   final String txt;
-  final void Function() checked;
+  final void Function() responder;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,13 @@ class Answaers extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: ElevatedButton(
-        onPressed: checked,
+        onPressed: responder,
         style: ElevatedButton.styleFrom(
             primary: Colors.amberAccent, onPrimary: Colors.black),
-        child: Text(txt),
+        child: Text(txt,
+            style: const TextStyle(
+              fontSize: 24,
+            )),
       ),
     );
   }
