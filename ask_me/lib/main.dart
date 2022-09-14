@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'questionario.dart';
 import 'resultado.dart';
@@ -19,7 +17,7 @@ class _AskMeAppState extends State<AskMeApp> {
 
   final _listaPerguntas = const [
     {
-      'pergunta': ' Qual é sua cor primária preferida?',
+      'pergunta': 'Escolha uma cor primária?',
       'respostas': [
         {'texto': 'Vermelho', 'cor': 'red'},
         {'texto': 'Azul', 'cor': 'blue'},
@@ -27,7 +25,7 @@ class _AskMeAppState extends State<AskMeApp> {
       ]
     },
     {
-      'pergunta': ' Qual é sua cor secundária preferida?',
+      'pergunta': 'Escolha uma cor secundária?',
       'respostas': [
         {'texto': 'Roxo', 'cor': 'purple'},
         {'texto': 'Laranja', 'cor': 'orange'},
@@ -41,9 +39,13 @@ class _AskMeAppState extends State<AskMeApp> {
       _perguntaSelecionada++;
       _coresSelecionadas.add(cor);
     });
+  }
 
-    log(cor);
-    log(_coresSelecionadas.length.toString());
+  void _reiniciar() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _coresSelecionadas.clear();
+    });
   }
 
   bool get _validarListaPerguntas {
@@ -61,8 +63,12 @@ class _AskMeAppState extends State<AskMeApp> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Colors',
-              style: TextStyle(fontSize: 36),
+              ':: Misturando Cores ::',
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           body:
@@ -73,7 +79,7 @@ class _AskMeAppState extends State<AskMeApp> {
                       responder: _responder,
                       validarListaPerguntas: _validarListaPerguntas,
                     )
-                  : Resultado(cores: _coresSelecionadas),
+                  : Resultado(cores: _coresSelecionadas, reiniciar: _reiniciar),
         ),
       ),
     );

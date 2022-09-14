@@ -15,7 +15,10 @@ class Pergunta extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(5, 20, 5, 20),
       child: Text(
         pergunta,
-        style: const TextStyle(fontSize: 28),
+        style: const TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
         textAlign: TextAlign.center,
       ),
     );

@@ -10,6 +10,31 @@ class Resposta extends StatelessWidget {
   final String txt;
   final void Function() responder;
 
+  Color? get corPersonalizadaBotao {
+    // primeira cor a ser escolhida
+    if (txt == "Vermelho") {
+      return Colors.redAccent;
+    }
+    if (txt == "Azul") {
+      return Colors.blueAccent;
+    }
+    if (txt == "Amarelo") {
+      return Colors.yellowAccent;
+    }
+    // segunda cor a ser escolhida
+    if (txt == "Roxo") {
+      return Colors.purpleAccent;
+    }
+    if (txt == "Laranja") {
+      return Colors.orangeAccent;
+    }
+    if (txt == "Verde") {
+      return Colors.green;
+    }
+    // cor neutra, para evitar erros
+    return Colors.grey;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +43,7 @@ class Resposta extends StatelessWidget {
       child: ElevatedButton(
         onPressed: responder,
         style: ElevatedButton.styleFrom(
-            primary: Colors.amberAccent, onPrimary: Colors.black),
+            primary: corPersonalizadaBotao, onPrimary: Colors.black),
         child: Text(txt,
             style: const TextStyle(
               fontSize: 24,
